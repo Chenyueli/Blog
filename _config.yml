@@ -4,8 +4,8 @@ reading_time:       true
 words_per_minute:   200
 locale:             en_US
 baseurl:            /
-url:                http://localhost:4000
-#url:                http://chenyuelili.com
+#url:                http://localhost:4000
+url:                http://chenyuelili.com
 
 
 # Jekyll
