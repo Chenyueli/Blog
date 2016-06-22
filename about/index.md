@@ -6,7 +6,7 @@ date: 2016-03-21
 comments: false
 ---
     
-<center><a href="http://taylantatli.github.io/Moon"><b>简爱</b></a> 是我最爱的小说人物，没有之一。坚强、勇敢。</center>
+<center><b>简爱</b>是我最爱的小说人物，没有之一。坚强、勇敢。</center>
 
 ## About Me
 * 2016年4月：初接触前端，觉得html/css/js、元素属性事件，写写特效也挺有趣；
