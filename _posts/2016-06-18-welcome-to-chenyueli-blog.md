@@ -4,9 +4,7 @@ title: "欢迎来到我的博客乐园"
 date: 2016-06-18
 excerpt: "Welcome come to Jane's blog. This is my first diary in this website."
 tag:
-- markdown 
-- jekyll
-- dairy
+- hello
 
 comments: true
 ---
