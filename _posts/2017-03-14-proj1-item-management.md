@@ -3,6 +3,7 @@ layout: project
 title: "南方物资后台管理系统"
 date: 2017-03-14
 excerpt: "PC端管理后台"
+project: true
 tag:
 - Vue
 - javascript
