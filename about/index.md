@@ -3,7 +3,7 @@ layout: page
 title: Web前端开发
 tags: [font-end]
 date: 2016-03-21
-comments: true
+comments: false
 ---
 从事前端使我更积极地表现自己，在学习中总结、提升自我，渐渐形成了一套较完整的自学体系。
 
