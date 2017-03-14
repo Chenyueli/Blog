@@ -1,11 +1,12 @@
 ---
 layout: project
-title: "认真理解背景图片 background-img"
+title: "南方物资后台管理系统"
 date: 2017-03-14
-excerpt: ""
+excerpt: "PC端管理后台"
 tag:
-- CSS
-- CSS3
+- Vue
+- javascript
+- Webpack
 
 comments: true
 ---

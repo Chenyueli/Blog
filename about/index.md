@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About Jane
+title: About Chenyueli
 tags: [about, Jekyll, theme, moon]
 date: 2016-03-21
 comments: false
@@ -15,9 +15,9 @@ comments: false
 * 寻梦没有终点，未完待续......
 
 
-* 有点儿小迷糊、有点儿小文艺、喜欢音乐、读书、电影、健身，这就是生活中的Jane
-* 一点儿执着、一点儿认真、一点儿激情，这就是工作中的Jane
-* 如果你有好的前端项目，或者想为我提供一份实习的机会，请联系我；
+* 有点儿小迷糊、有点儿小文艺、喜欢音乐、读书、电影、健身，这就是生活中的我
+* 一点儿执着、一点儿认真、一点儿激情，这就是工作中的我
+* 如果你有好的前端项目，或者想为我提供一份实习的机会,contact me ~；
 
 
  
