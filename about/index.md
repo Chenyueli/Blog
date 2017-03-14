@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 当我谈前端的时候我在谈什么？
+title: Web前端开发
 tags: [font-end]
 date: 2016-03-21
 comments: true
