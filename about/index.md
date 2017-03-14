@@ -12,7 +12,7 @@ comments: true
 HTML5  		★★★★☆
 CSS3  		★★★★☆
 Javascript 	★★★★☆
-Vue.js      ★★★☆☆
+Vue.js          ★★★☆☆
 Jquery 		★★★★☆
 less     	★★★☆☆
 </pre>
