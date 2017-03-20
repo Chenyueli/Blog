@@ -4,7 +4,9 @@ title: "移动前端开发系列笔记（1）——移动端开发入门"
 date: 2017-02-13
 excerpt: "好记性不如烂笔头"
 tag:
-- 计划
+- javascript
+- CSS
+- jquery
 
 comments: true
 ---
