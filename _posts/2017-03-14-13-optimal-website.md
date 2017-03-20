@@ -12,6 +12,8 @@ comments: false
 
 [YaHoo Web优化的14条法则](http://www.cnblogs.com/silverLee/archive/2009/11/05/1596453.html)
 
+[前端工程与性能优化](http://kb.cnblogs.com/page/213726/)
+
 <pre>
 1. 尽可能地减少HTTP的请求				content
 2. 使用CDN					server
