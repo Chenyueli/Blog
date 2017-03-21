@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "建站笔记"
-date: 2016-10-30
+title: "个人建站笔记"
+date: 2016-5-30
 excerpt: "本文记录了如何在github pages上建立个人网站。git,markdown,bootstrap,jekyll。"
 project: true
 tag:
