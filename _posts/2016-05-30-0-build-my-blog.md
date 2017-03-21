@@ -7,6 +7,7 @@ project: true
 tag:
 - HTML
 - sass
+- CSS3
 - javascript
 - jquery
 - 项目实战
@@ -42,17 +43,36 @@ http://www.runoob.com/jqueryui/example-menu.html
 
 
 
-## 动画
+## 网站动画效果
+<a href = "http://daneden.me/animate" target = "_blank">来源：animate.css</a>
 
-animate.sass
+例：左侧淡入
 
-http://opensource.org/licenses/MIT
+	.fadeInLeft{
+	animation-name:fadeInLeft;
+	-webkit-animation-name:fadeInLeft;
+	}
+	@keyframes fadeInLeft {
+	  from {
+	    opacity: 0;
+	    -webkit-transform: translate3d(-100%, 0, 0);
+	    transform: translate3d(-100%, 0, 0);
+	  }
+	
+	  to {
+	    opacity: 1;
+	    -webkit-transform: none;
+	    transform: none;
+	  }
+	}
 
 ## SASS语法
 http://www.w3cplus.com/sassguide/syntax.html
 
+http://sass.bootcss.com/docs/sass-reference/#cache_location-option
+
 ## CSS开发样式
-CSS
+elements.scss 
 
 初始：
 
