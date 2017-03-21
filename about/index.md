@@ -1,66 +1,28 @@
 ---
 layout: page
-title: Web前端开发
-tags: [font-end]
-date: 2016-03-21
+title: Tag Archive
+description: "An archive of posts sorted by tag."
 comments: false
 ---
-从事前端使我更积极地表现自己，在学习中总结、提升自我，渐渐形成了一套较完整的自学体系。
 
-# 一、前端资源
+{% capture site_tags %}{% for tag in site.tags %}{{ tag | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
+{% assign tags_list = site_tags | split:',' | sort %}
 
-学习前端是一个充实愉悦的过程，知识库日益丰满的感觉非常奇妙！
+<ul class="entry-meta inline-list">
+  {% for item in (0..site.tags.size) %}{% unless forloop.last %}
+    {% capture this_word %}{{ tags_list[item] | strip_newlines }}{% endcapture %}
+  	<li><a href="#{{ this_word }}" class="tag"><span class="term">{{ this_word }}</span> <span class="count">{{ site.tags[this_word].size }}</span></a></li>
+  {% endunless %}{% endfor %}
+</ul>
 
-1、书籍
-
-看专业书帮我们系统地学习一门语言，形成完整的只是体系。我学习前端用到的书籍：
-<pre>
-1. 《Javascript高级程序设计 （第三版）》   
-2. 《锋利的jquery （第二版）》
-3. 《JavaScript&jQuery 交互式Web前端开发》 
-4. 《HTML&CSS 交互式Web前端开发》  
-5. 《CSS权威指南》
-6. 《Javascript DOM 编程艺术 （第二版）》
-</pre>
-
-2、 视频
-
-自学网站： W3School基础入门、慕课网、麦子学院
-
-3、 社区和网站
-
-常去的网站：博客园、前端乱炖、CSDN、Github以及前端牛人网站如阮一峰等
-
-**学习心得**: 如今模块化、组件化、工程化已是开发必备，但JavaScript对于前端仍然是最重要的技能，功扎实基本功，方可在新技术中游刃有余，共勉。
-
-
-# 二、我的经历
-
-2016-2017 厦门大学首批网络文化工作室	NOVA前端负责人 
-
-负责并开发了外贸电商网站、厦大家教网、物资申领系统、运动会乘车统计等项目
-
-# 三、我的作品
-
-## 外贸电商网站  jquery,less, JaveScript   负责人&前端开发
-
-主营办公用品、户外用品等的电商网站。项目实现了后台管理和用户商城两部分。
-
-用户商城实现商品展示、VIP用户信息采集和用户留言等功能。用户可注册VIP获得优惠，查看并购买商品，售后提交个人反馈等。
-
-后台管理帮助网站管理员管理库存商品和网站用户。包括实时更新展列商品，查看并处理用户留言，修改权限实现多人管理等功能。
-
-
-## 厦大家教网  jquery,less,Javascript   移动前端开发
-
-厦大家教网的移动端实现，学生和家教注册、登录，学生可查看金牌教师和发布家教需求；家教老师可在手机上进行照片认证、预约家教等功能。
-
-## 物资申领系统  Vue,Sass,Webpack,Javascript  前端开发工程师
-
-项目实现了系统管理员可以管理物资申领和借用，订单管理和贵重物品管理等
-
-
-
-
- 
- 
+{% for item in (0..site.tags.size) %}{% unless forloop.last %}
+  {% capture this_word %}{{ tags_list[item] | strip_newlines }}{% endcapture %}
+	<article>
+	<h2 id="{{ this_word }}" class="tag-heading">{{ this_word }}</h2>
+		<ul>
+    {% for post in site.tags[this_word] %}{% if post.title != null %}
+      <li class="entry-title"><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+    {% endif %}{% endfor %}
+		</ul>
+	</article><!-- /.hentry -->
+{% endunless %}{% endfor %}
