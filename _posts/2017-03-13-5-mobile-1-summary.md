@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "移动前端开发系列笔记（1）——移动端开发入门"
-date: 2017-02-13
-excerpt: "好记性不如烂笔头"
+date: 2017-03-16
+excerpt: "移动前端的一些基本概念"
 tag:
 - javascript
 - CSS
