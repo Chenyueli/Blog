@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "项目：南方物资后台管理系统
+title: "项目：南方物资后台管理系统"
 date: 2017-03-17
 excerpt: "如何用Vue.js搭建一个物资后台管理网站"
 project: true
