@@ -57,16 +57,15 @@ PS：本文node v6.2.2 npm v3.9.5 vue v2.1.0 vue-router v2.0.3 vuex v2.0.0
 
 ## 初始化（main.js）
 
-<pre>
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import VueResouce from 'vue-resource'
-import store from './store'
-import App from './App'
-import NotFound from './components/404'
-import Home from './components/Home'
+	import Vue from 'vue'
+	import VueRouter from 'vue-router'
+	import VueResouce from 'vue-resource'
+	import store from './store'
+	import App from './App'
+	import NotFound from './components/404'
+	import Home from './components/Home'
+	
 
-</pre>
 
 ### vue-router
 http://router.vuejs.org/zh-cn/
@@ -74,103 +73,102 @@ http://router.vuejs.org/zh-cn/
 用 Vue.js + vue-router 创建单页应用，是非常简单的。使用 Vue.js 时，我们就已经把组件组合成一个应用了，当你要把 vue-router 加进来，只需要配置组件和路由映射，然后告诉 vue-router 在哪里渲染它们。
 
 在main.js
-<pre>
-// 0. 安装、注册使用
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
+	
+	// 0. 安装、注册使用
+	import VueRouter from 'vue-router'
+	Vue.use(VueRouter)
+	
+	// 1. 定义（路由）组件。
+	// 可以从其他文件 import 进来
+	const Foo = { template: '<div>foo</div>' } 组件必须有template
+	import ManageSort from './components/ManageSort'
+	import AddItems from './components/AddItems'
+	import ManageOrder from './components/ManageOrder'
+	
+	// 2. 定义路由
+	
+	const routes = [
+		{
+		path:'/',
+		component: Home
+		},{
+		path:'/home',
+		component:Home,
+		children:[
+		{path:'manageSort',component:ManageSort},
+		{name:'addCargo',path:'addCargo/:appBorr',component:AddItems},
+		{name :'manageSort',path:'manageSort/:appBorr',component:ManageSort},
+		{path:'manageOrder',csomponent:ManageOrder},
+		{name:"manageOrder", path:'applyOrder/:orderType/:status',component:ManageOrder},
+		{path:'manageValuable',component:ManageValuable},
+		{name : "myproducts",path:'viewProducts/:appBorr/:type',component:ViewProducts},
+		]
+		},{
+		path:'/login',
+		component:Login
+		},{
+		path : '*',component : NotFound}
+	];
+	// 3. 创建 router 实例，然后传 `routes` 配置
+	const router = new VueRouter({routes});
+	
+	// 4. 创建和挂载根实例。
+	// 记得要通过 router 配置参数注入路由，
+	// 从而让整个应用都有路由功能
 
-// 1. 定义（路由）组件。
-// 可以从其他文件 import 进来
-const Foo = { template: '<div>foo</div>' } 组件必须有template
-import ManageSort from './components/ManageSort'
-import AddItems from './components/AddItems'
-import ManageOrder from './components/ManageOrder'
-
-// 3. 定义路由
-
-const routes = [
-	{
-	path:'/',
-	component: Home
-	},{
-	path:'/home',
-	component:Home,
-	children:[
-	{path:'manageSort',component:ManageSort},
-	{name:'addCargo',path:'addCargo/:appBorr',component:AddItems},
-	{name :'manageSort',path:'manageSort/:appBorr',component:ManageSort},
-	{path:'manageOrder',csomponent:ManageOrder},
-	{name:"manageOrder", path:'applyOrder/:orderType/:status',component:ManageOrder},
-	{path:'manageValuable',component:ManageValuable},
-	{name : "myproducts",path:'viewProducts/:appBorr/:type',component:ViewProducts},
-	]
-	},{
-	path:'/login',
-	component:Login
-	},{
-	path : '*',component : NotFound}
-];
-// 3. 创建 router 实例，然后传 `routes` 配置
-const router = new VueRouter({routes});
-
-// 4. 创建和挂载根实例。
-// 记得要通过 router 配置参数注入路由，
-// 从而让整个应用都有路由功能
-
-new Vue({
-  el: '#app',
-  router,
-  template: '<App/>',
-  store,
-  // components: { App,Login,Home,NotFound}
-  ...App,
-});
+	new Vue({
+	  el: '#app',
+	  router,
+	  template: '<App/>',
+	  store,
+	  // components: { App,Login,Home,NotFound}
+	  ...App,
+	});
 
 // 现在，应用已经启动了！
-</pre>
 
 在HTML中使用路由：
-<pre>
+
 	//使用 router-link 组件来导航.
     //<router-link> 默认会被渲染成一个 `<a>` 标签
 	//通过传入 `to` 属性指定链接. 
-<router-link :to="{name:'addCargo',params:{appBorr:'apply'}}">新增物资</router-link>
-	
-<router-link to="/home/manageValuable">贵重物品</router-link>
+
+	<router-link :to="{name:'addCargo',params:{appBorr:'apply'}}">新增物资</router-link>
+		
+	<router-link to="/home/manageValuable">贵重物品</router-link>
 	
 	// 路由出口 
   	// 路由匹配到的组件将渲染在这里
-  <router-view></router-view>
-</pre>
+  	<router-view></router-view>
+
 ### vuex
 首先创建store文件夹，内有`index.js/action.js/mutation-type.js/mutation.js`四个文件
-<pre>
-在`index.js`中引入并注册Vuex,
-import Vue from 'vue'
-import Vuex from 'vuex'
-import mutations from './mutations'
-import actions from './actions'
 
-Vue.use(Vuex);
+	//在`index.js`中引入并注册Vuex,
 
-const state = {
-	"valuables":[
-	{"id":1,"name":"百事可乐","amount":1,"price":10,"size":"200ml","remark":"无"},
-	{"id":2,"name":"项链","amount":1,"price":10000,"size":"1","remark":"珀金"}
-	]
-}
-
-
-//在action.js中定义函数对数据流进行操作
-[types.ADD_CARGO] (state,cargo) {
-    console.log(cargo.name);
+	import Vue from 'vue'
+	import Vuex from 'vuex'
+	import mutations from './mutations'
+	import actions from './actions'
 	
-  },
+	Vue.use(Vuex);
+	
+	const state = {
+		"valuables":[
+		{"id":1,"name":"百事可乐","amount":1,"price":10,"size":"200ml","remark":"无"},
+		{"id":2,"name":"项链","amount":1,"price":10000,"size":"1","remark":"珀金"}
+		]
+	}
+	
+	
+	//在action.js中定义函数对数据流进行操作
+	[types.ADD_CARGO] (state,cargo) {
+	    console.log(cargo.name);
+		
+	  },
 
-//在`main.js`中调用store文件夹
-`import store from './store'`
-
-</pre>
+	//在`main.js`中调用store文件夹
+	`import store from './store'`
 
 在.vue组件中调用函数，就可以实现数据流更新
 
@@ -179,23 +177,35 @@ const state = {
 
 
 ### vue-resource
+安裝/引入/全局注冊：
+`npm i vue-resource --save`
+main.js
+
+	import VueResource from 'vue-resource'
+	Vue.use(VueResouce)
+
+使用：
+
+	
+	// 基于全局Vue对象使用http
+	Vue.http.post('/someUrl', [body], [options]).then(successCallback, errorCallback);
+	
+	基于某个Vue实例使用http
+	this.$http.get('/someUrl', [options]).then(successCallback, errorCallback);
 
 1. 在main.js 中**引入**并**注册**，就可以在组件中使用。
-<pre>
+
 	import VueResouce from 'vue-resource'
 	Vue.use(VueResouce)
-</pre>
+
 2. 组件调用：
-<pre>
+
 	var data = {"name":"chenmaomao"};
 	this.$http.post('/cargo/api/admin/item?m=add',data,{emulateJSON:true}).then( response => {
 					console.log(response.status);
 					// get object data
 					console.log(response.body);
 	});
-</pre>
-
-
 
 
 <pre>
@@ -203,40 +213,4 @@ const state = {
 $ npm run build
 </pre>
 ### node js 調試
-
-
-
-### vue-resource
-<pre>
-安裝/引入/全局注冊：
-npm i vue-resource --save
-main.js
-import VueResource from 'vue-resource'
-Vue.use(VueResouce)
-</pre>
-
-使用：
-
-<pre>
-// 基于全局Vue对象使用http
-Vue.http.post('/someUrl', [body], [options]).then(successCallback, errorCallback);
-
-基于某个Vue实例使用http
-this.$http.get('/someUrl', [options]).then(successCallback, errorCallback);
-</pre>
-
-
-<pre>
-js遍历数组 
-array.forEach(function(item,index){
-
-}
-删除数组某个元素
-
-js遍历对象
-
-删除对象某个属性
-
-</pre>
-
-
+用node.js写一端开启服务代码，就成功用vue建立起一个网站！
