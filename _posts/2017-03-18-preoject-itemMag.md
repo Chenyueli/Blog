@@ -53,7 +53,6 @@ PS：本文node v6.2.2 npm v3.9.5 vue v2.1.0 vue-router v2.0.3 vuex v2.0.0
 ` npm i css-loader node-sass sass-loader vue-style-loader --save`
 
 目录结构：
-![](http://7xim8z.com1.z0.glb.clouddn.com/vue2spa-0.png)
 
 ## 初始化（main.js）
 
