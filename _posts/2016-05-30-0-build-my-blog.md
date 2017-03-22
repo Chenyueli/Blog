@@ -88,6 +88,10 @@ http://sass.bootcss.com/docs/sass-reference/#cache_location-option
 .container{
 width:80%;
 max-width:550px;
+display:block;
+margin-left:auto;
+margin-right:auto;
+
 
 
 }
