@@ -18,7 +18,7 @@ JavaScript是一种弱类型语言，由于**声明形参无须定义数据类�
         window.onload = function(){
 
 	        var twoSum = function(nums, target) {
-	            if(isaNumArr(nums) && isNaN(parseInt(target)){//判断参数类型
+	            if(isaNumArr(nums) && !isNaN(parseInt(target))){//判断参数类型
 	                    var nums = nums,
 	                    target = target;
 	                    var len = nums.length,
