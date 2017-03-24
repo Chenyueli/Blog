@@ -80,9 +80,9 @@ JavaScript主要通过**原型链**实现继承。原型链的构建是通过将
 	ins2.sayAge(); //17
 	
 	console.log(Sub.prototype); //Supper {name: undefined, colors: Array(3), constructor: function, sayAge: function}
-	alert(Sub.prototype.constructor);
-	console.log(Supper.prototype);
-	alert(Supper.prototype.constructor);//Object {sayName: function, constructor: function}
+	alert(Sub.prototype.constructor);//function Sub(){...}
+	console.log(Supper.prototype);//Object {sayName: function, constructor: function}
+	alert(Supper.prototype.constructor);//function Supper(){...}
 	</script>
 
 来源：<a href = "http://blog.sina.com.cn/s/blog_694c144f0101o4ol.html" target = "_blank">javascript 原型链的理解</a>，<a href = "http://www.cnblogs.com/humin/p/4556820.html" target = "_blank">JS实现继承的几种方法</a>
