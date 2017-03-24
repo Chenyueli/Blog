@@ -55,38 +55,38 @@ alert("10");
 
 
 <script>
-		(function testCyl(){
-			function Supper(name){
-				this.name = name;
-				this.colors = ["red","blue","green"]
-			}
-			Supper.prototype.sayName = function(){
-				alert(this.name);
-			}
-			function Sub(name,age){
-				//继承属性
-				Supper.call(this,name)
-				this.age = age;
-			}
-			//继承方法
-			Sub.prototype = new Supper();
-			Sub.prototype.constructor = Sub;
-			Sub.prototype.sayAge = function(){
-				alert(this.age);
-			}
+(function testCyl(){
+function Supper(name){
+this.name = name;
+this.colors = ["red","blue","green"]
+}
+Supper.prototype.sayName = function(){
+alert(this.name);
+}
+function Sub(name,age){
+//继承属性
+Supper.call(this,name)
+this.age = age;
+}
+//继承方法
+Sub.prototype = new Supper();
+Sub.prototype.constructor = Sub;
+Sub.prototype.sayAge = function(){
+alert(this.age);
+}
 			
-			var ins1 = new Sub("cyl",18);
-			ins1.colors.push("black")
-			alert(ins1.colors);
-			ins1.sayName();
-			ins1.sayAge();
+var ins1 = new Sub("cyl",18);
+ins1.colors.push("black")
+alert(ins1.colors);
+ins1.sayName();
+ins1.sayAge();
 			
-			var ins2 = new Sub("cll",17);
-			alert(ins2.colors);
-			ins2.sayName();
-			ins2.sayAge();
-	})();
-	window.testCyl = testCyl;
+var ins2 = new Sub("cll",17);
+alert(ins2.colors);
+ins2.sayName();
+ins2.sayAge();
+})();
+window.testCyl = testCyl;
 </script>
 
 <button onclick="testCyl()">运行</button> 
