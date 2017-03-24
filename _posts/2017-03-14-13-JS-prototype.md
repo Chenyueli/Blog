@@ -48,7 +48,7 @@ JavaScript主要通过**原型链**实现继承。原型链的构建是通过将
 使用最多的继承模式是**组合继承**，这种模式使用原型链继承**共享的属性和方法**，而通过借用构造函数继承 **实例属性**。
 
 <script>
-		function testCyl(){
+		(function testCyl(){
 			function Supper(name){
 				this.name = name;
 				this.colors = ["red","blue","green"]
@@ -78,7 +78,7 @@ JavaScript主要通过**原型链**实现继承。原型链的构建是通过将
 			alert(ins2.colors);
 			ins2.sayName();
 			ins2.sayAge();
-	}
+	})();
 	window.testCyl = testCyl;
 </script>
 
