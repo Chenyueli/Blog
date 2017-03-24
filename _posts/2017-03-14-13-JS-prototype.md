@@ -79,6 +79,7 @@ JavaScript主要通过**原型链**实现继承。原型链的构建是通过将
 			ins2.sayName();
 			ins2.sayAge();
 	}
+	window.testCyl = testCyl;
 </script>
 
 <button onclick="testCyl()">运行</button> 
