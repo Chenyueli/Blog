@@ -47,45 +47,37 @@ JavaScript主要通过**原型链**实现继承。原型链的构建是通过将
 ### 3. 组合继承
 使用最多的继承模式是**组合继承**，这种模式使用原型链继承**共享的属性和方法**，而通过借用构造函数继承 **实例属性**。
 
-
-
-
-<script>
-(function testCyl(){
-function Supper(name){
-this.name = name;
-this.colors = ["red","blue","green"]
-}
-Supper.prototype.sayName = function(){
-alert(this.name);
-}
-function Sub(name,age){
-//继承属性
-Supper.call(this,name)
-this.age = age;
-}
-//继承方法
-Sub.prototype = new Supper();
-Sub.prototype.constructor = Sub;
-Sub.prototype.sayAge = function(){
-alert(this.age);
-}
-			
-var ins1 = new Sub("cyl",18);
-ins1.colors.push("black")
-alert(ins1.colors);
-ins1.sayName();
-ins1.sayAge();
-			
-var ins2 = new Sub("cll",17);
-alert(ins2.colors);
-ins2.sayName();
-ins2.sayAge();
-})();
-window.testCyl = testCyl;
-</script>
-
-<button onclick="testCyl()">运行</button> 
+	<script>
+	function Supper(name){
+	this.name = name;
+	this.colors = ["red","blue","green"]
+	}
+	Supper.prototype.sayName = function(){
+	alert(this.name);
+	}
+	function Sub(name,age){
+	//继承属性
+	Supper.call(this,name)
+	this.age = age;
+	}
+	//继承方法
+	Sub.prototype = new Supper();
+	Sub.prototype.constructor = Sub;
+	Sub.prototype.sayAge = function(){
+	alert(this.age);
+	}
+				
+	var ins1 = new Sub("cyl",18);
+	ins1.colors.push("black")
+	alert(ins1.colors);//"red","blue","green","black"
+	ins1.sayName();//cyl
+	ins1.sayAge();//18
+				
+	var ins2 = new Sub("cll",17);
+	alert(ins2.colors); //"red","blue","green"
+	ins2.sayName(); //cll
+	ins2.sayAge(); //17
+	</script>
 
 来源：<a href = "http://blog.sina.com.cn/s/blog_694c144f0101o4ol.html" target = "_blank">javascript 原型链的理解</a>，<a href = "http://www.cnblogs.com/humin/p/4556820.html" target = "_blank">JS实现继承的几种方法</a>
 
