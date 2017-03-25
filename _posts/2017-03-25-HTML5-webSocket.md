@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "webSocket双向通信"
-date: 2017-03-16
+date: 2017-03-25
 excerpt: "WebSocket API是下一代客户端-服务器的异步通信方法,用于双向推送消息，多用于实时性要求很高（秒级）的场合，如在实时聊天（在浏览器内）、直播平台等"
 tag:
 - HTML5
