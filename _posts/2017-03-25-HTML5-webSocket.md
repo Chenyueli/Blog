@@ -13,13 +13,27 @@ comments: false
 
 WebSocket 客户端 API 示例:
 
-	var ws = new WebSocket(“ws://echo.websocket.org”); 
-	 ws.onopen = function(){ws.send(“Test!”); }; 
-	 ws.onmessage = function(evt){console.log(evt.data);ws.close();}; 
-	 ws.onclose = function(evt){console.log(“WebSocketClosed!”);}; 
-	 ws.onerror = function(evt){console.log(“WebSocketError!”);};
+	if (window.WebSocket) {
+		var ws = new WebSocket(“ws://echo.websocket.org”); 
+		 ws.onopen = function(){ws.send(“Test!”); }; 
+		 ws.onmessage = function(evt){console.log(evt.data);ws.close();}; 
+		 ws.onclose = function(evt){console.log(“WebSocketClosed!”);}; 
+		 ws.onerror = function(evt){console.log(“WebSocketError!”);};
+	}else{
+		console.log("您的设备不支持 webSocket!");
+	}
 
-实现实时消息的通知及推送，
+
+
+- 申请一个`WebSocket`对象，参数是需要连接的服务器端的地址，WebSocket 协议的 URL 使用 ws://开头，安全的 WebSocket 协议使用 wss://开头。
+- 当 Browser 和 WebSocketServer 连接成功后，会触发 onopen 消息；
+- 如果连接失败，发送、接收数据失败或者处理数据出现错误，browser 会触发 onerror 消息；
+- 当 Browser 接收到 WebSocketServer 发送过来的数据时，就会触发 onmessage 消息，参数 `evt` 中包含 Server 传输过来的数据；
+- 当 Browser 接收到 WebSocketServer 端发送的关闭连接请求时，就会触发 onclose 消息。
+ 
+ 
+我们可以看出所有的操作都是采用异步回调的方式触发，这样不会阻塞 UI，可以获得更快的响应时间，更好的用户体验。
+
 
 
 
