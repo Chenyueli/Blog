@@ -141,6 +141,7 @@ drag:指尖在页面上滚动或滑动
 
 flick：指尖快速滑动页面
 
+ <img src="{{ site.url }}/assets/img/post/gestures.png" width="300" alt= "手势">
 ## CSS3
 1. 合理使用渐变、圆角、阴影（别太多，低端机hold不住）
 2. 代替js动画：性能好，兼容性好， why not?
