@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "移动前端开发系列笔记（1）——移动端开发入门"
-date: 2017-03-16
+date: 2017-03-20
 excerpt: "移动前端的一些基本概念"
 tag:
 - javascript
@@ -20,8 +20,8 @@ Web App：网页应用HTML5开发
 
 Hybrid App：混合应用（native,web)
 
-<img src = "{{ site.url }}/assets/img/post/compare.png"  alt="三种对比"/ >
 
+<img src = "{{ site.url }}/assets/img/post/compare.png" width="300" alt="三种对比" >
 #视觉
 
 ## 在移动浏览器中使用viewport源标签控制布局
