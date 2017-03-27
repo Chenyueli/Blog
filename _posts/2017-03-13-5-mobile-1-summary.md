@@ -20,12 +20,7 @@ Web App：网页应用HTML5开发
 
 Hybrid App：混合应用（native,web)
 
-Web App 不需要安装，开发成本低，维护简单，跨平台性能优
-但体验感较差；
-
-Native 需要安装，开发成本高，维护更新复杂，跨平台性能较差，**但体验感很好！**
-
-Hybrid App 介于两则之间。 需要安装，开发成本居中，维护简单，跨平台性能良好。
+<img src = "{{ site.url }}/assets/img/post/compare.png"  alt="三种对比"/ >
 
 #视觉
 
