@@ -22,6 +22,7 @@ Hybrid App：混合应用（native,web)
 
 
 <img src = "{{ site.url }}/assets/img/post/compare.png" width="300" alt="三种对比" >
+
 #视觉
 
 ## 在移动浏览器中使用viewport源标签控制布局
