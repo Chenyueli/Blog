@@ -104,8 +104,50 @@ radix:	可选。表示要解析的数字的基数，默认十进制。
 	parseInt("12ab")	->12
 
 
+3.javascript中的隐式转换
+ <pre>
+基本类型的转换
+1.字符串加数字,数字就会转成字符串。
+2.数字减字符串，字符串转成数字。如果字符串不是纯数字就会转成NaN。
+3.乘，除，大于，小于跟减的转换也是一样。
+== 
+1.undefined等于null
+2.字符串和数字比较时，字符串转数字
+3.数字为布尔比较时，布尔转数字
+4.字符串和布尔比较时，两者转数字
+
+	// ==
+	undefined == null;    //true
+	'0' == 0;        　　  //true,字符串转数字
+	0 == false;           //true,布尔转数字
+	'0' == false;    　　　//true,两者转数字
+	null == false;     　 //false
+	undefined == false; 　//false
+
+引用类型的转换：引用类型和基本类型的比较就相对复杂一些，先要把引用类型转成基本类型，再按上述的方法比较。
+
+1.引用类型转布尔全是true。比如空数组，只要是对象就是引用类型，所以[]为true。用if(引用类型)都为true.
+2.引用类型转数字或者字符串就要用valueOf()或者toString();1.对象转数字时，调用valueOf();2.对象转字符串时，调用toString();
+
+	0 == [];        // true, 0 == [].valueOf(); -> 0 == 0;
+	'0' == [];      // false, '0' == [].toString(); -> '0' == '';
+	2 == ['2'];     // true, 2 == ['2'].valueOf(); -> 2 == '2' -> 2 == 2;
+	'2' == [2];     // true, '2' == [2].toString(); -> '2' =='2';
+	[] == ![];      //true, [].valueOf() == !Boolean([]) -> 0 == false -> 0 == 0;
 
 
+
+转为布尔值：if()
+undefined,null,0,"" ->false
+[],{},其他 ->true
+
+用"=="
+"0" == false
+0 == false;
+'0' == 0; 
+undefined == null; 
+</pre>
+<a href = "http://www.2cto.com/kf/201502/377443.html">JavaScript的隐式转换</a>
 ### window.onload 加载
 一般在文档加载完成后执行javaScript脚本，否则可能**无法获取DOM对象**，为了避免这种情况的发生，可以使用以下两种方式:
 
