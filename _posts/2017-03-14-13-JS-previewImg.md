@@ -8,6 +8,27 @@ tag:
 
 comments: false
 ---
+## 一、FileReader
+FileReader API 用于读取文件，即把文件内容读入内存。它的参数是 File 对象或 Blob 对象。
+
+对于不同类型的文件，FileReader 提供不同的方法读取文件。
+
+
+- readAsText(Blob|File, opt_encoding)：返回文本字符串。默认情况下，文本编码格式是 UTF-8，可以通过可选的格式参数，指定其他编码格式的文本。
+- readAsDataURL(Blob|File)：返回一个基于 Base64 编码的 data-uri 对象
+- readAsArrayBuffer()：返回一个 ArrayBuffer 对象。
+
+FileReader 对象采用异步方式读取文件，可以为一系列事件指定回调函数。
+
+
+
+- onabort 方法：读取中断或调用 reader.abort() 方法时触发。
+- onerror 方法：读取出错时触发。
+- onload 方法：读取成功后触发。
+- onloadend 方法：读取完成后触发，不管是否成功。触发顺序排在 onload 或 onerror 后面。
+- onloadstart 方法：读取将要开始时触发。
+- onprogress 方法：读取过程中周期性触发。（可以用来获取文件读取的进度）
+
 ## 一、FileReader实现小文件直接嵌入文档（IE9+)
 
 调用FileReader对象的方法：
@@ -106,3 +127,7 @@ path=window.URL.createObjectURL(imgFile.files[0]);// FF 7.0以上
 	</div>
 	</body>
 	</html> 
+
+
+更多参考：
+[HTML5 File API — 让前端操作文件变的可能](http://www.cnblogs.com/zichi/p/html5-file-api.html)

@@ -38,3 +38,5 @@ WebSocket 客户端 API 示例:
 
 
 来源：<a href = "http://www.ibm.com/developerworks/cn/java/j-lo-WebSocket/" target = "_blank">WebSocket 实战</a>
+
+[ 前端解决跨域问题的8种方案](http://blog.csdn.net/joyhen/article/details/21631833)
