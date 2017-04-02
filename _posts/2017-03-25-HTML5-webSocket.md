@@ -83,4 +83,5 @@ WebSocket 客户端 API 示例:
 	    var data = JSON.parse(e.data);
 	    console.log(data); //{xxx:'test'}
 	}
+
 [浅谈js跨域问题](https://segmentfault.com/a/1190000003784372)
