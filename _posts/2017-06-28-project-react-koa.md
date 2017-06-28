@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "koa2+react+ant design搭建一个简单的记事本应用"
+title: "项目：代办记事"
 date: 2017-04-13
-excerpt: "技术栈：koa2＋webpack脚手架搭建、react全家桶、ant design ui组件、eslint代码校验"
+excerpt: "技术栈：koa2＋webpack脚手架搭建、react全家桶、ant design UI组件、eslint代码校验"
 project: true
 tag:
 - React.js
