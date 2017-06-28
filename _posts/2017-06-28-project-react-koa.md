@@ -13,60 +13,304 @@ comments: false
 ---
 1 零、为什么想做这个应用？
 
-<a href = '#one'> 一、koa2+webpack脚手架搭建react开发环境？</a>
+一、<a href = '#one'> koa2+webpack脚手架搭建react开发环境</a>
 
-#### 二、构建路由、组建拆分、redux设计(容器组建、展示组建）
+一、<a href = '#two'>构建路由、组建拆分、redux设计(容器组建、展示组建）</a>
 
-#### 三、简单的静态页面设计（ant design）和动态交互（redux/react)
+二、<a href = '#three'>构建路由、组建拆分、redux设计(容器组建、展示组建）</a>
 
-#### 四、用mock.js模拟数据
+三、<a href = '#four'>简单的静态页面设计（ant design）和动态交互（redux/react)</a>
 
-#### 五、优化和总结
+四、<a href = '#five'>用mock.js模拟数据</a>
 
-
-
-
+五、<a href = '#six'>优化和总结</a>
 
 
+##一、koa2+webpack脚手架搭建react开发环境 
+<div id = 'one'></div>
 
--
--
+### Koa2环境搭建
 
-a
-a
-a
-a
+#### 1. 创建项目
 
-a
+新建一个项目，初始化npm后生成`package.json`文件
+
+	mkdir my-app && cd my-app
+	npm init
+	
+
+####2. 本地安装koa2和babel|启动koa2服务
+koa2需要es7 语法，切换node到版本7.10以上
+
+	nvm use 7
+	npm install koa --save
+	cnpm install babel-core babel-polyfill babel-register babel-preset-env --save-dev
+
+本地安装好babel后，还需要配置babel.在当前项目中新建一个.babelrc
+
+在.babelrc中添加如下配置,这样Koa2 项目中就可以使用ES6的语法
+
+	{
+	  "presets": ["env"]
+	}
+
+在当前项目中新建一个文件夹server,然后进入server文件夹,创建两个入口文件分别是index.js和server.js
+
+index.js文件中的代码如下：
+
+	require('babel-register');
+	require('babel-polyfill');
+	require('./server.js');
+	
+server.js文件中的代码如下：
+
+	import Koa from 'koa';
+	const app = new Koa();
+	app.use(async (ctx, next) => {
+	  const start = new Date();
+	  await next();
+	  const ms = new Date() - start;
+	  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+	});
+	// response
+	app.use((ctx) => {
+	  ctx.body = 'Hello Koa in app-async.js';
+	});
+	app.listen(8080);
+	console.log("系统启动，端口：8080");
+	module.exports = app;	
+	
+全局安装nodemon自动重启node服务工具，启动koa2服务
+
+	npm install nodemon -g
+	nodemon server/index.js
+	
+浏览器打开`localhost:8080`看到页面为`Hello Koa in app-async.js`。koa2的环境就搭建成功！
+
+来源：<a href = 'http://nekomiao.me/2017/05/23/koa2-react-webpack-deployment/' target = '_blank'>总结</a>
+
+#### 3. 配置git忽略项目
+
+新建一个.gitignore文件，文件的内容如下：	
+
+	.idea/
+	node_modules/
 
 
-a
+<hr/>
+## koa2+react
+<hr/>
+#### 4. 安装React和ReactDom
+
+	cnpm install react react-dom --save
+
+在当前目录下新建一个app文件夹，在文件夹中新建一个main.js
+
+main.js代码如下：
+
+	import React from 'react';
+	import ReactDOM from 'react-dom';
+	ReactDOM.render(<div>chenyueli</div>, document.getElementById('root'));
+
+在当前项目目录下，新建一个views文件夹，并在views文件夹中新建一个index.html
+
+index.html文件内容如下：
+
+	<!DOCTYPE html>
+	<html>
+	  <head>
+	    <meta charset="utf-8">
+	    <title></title>
+	  </head>
+	  <body>
+	    <div id="root">
+	    </div>
+	    <script src="main.bundle.js"></script>
+	  </body>
+	</html>
+	
+注意：上面script的src目录是正确的，因为下面koa服务器设置静态文件目录后，会自动查找到main.bundle.js
 
 
-a
+为加速网站，一般将webpack打包的代码保存在内存中，而非磁盘中，因此是不可见的。
 
 
-a
+#### 5. koa－views 渲染模版
+安装koa-static和koa-views用于<b>设置koa的静态文件目录</b>和<b>模板渲染</b>
+
+	npm install koa-static --save
+	npm install koa-views --save
+
+修改当前项目下server/server.js中的内容：
+
+	import Koa from 'koa';
+	import views from 'koa-views';
+	import path from 'path';
+	const app = new Koa(); 
+	app.use(require('koa-static')(path.join(__dirname, '../build')));
+	app.use(views(path.join(__dirname, '../views'), {
+	  extension: 'html'
+	}));
+	app.use(async (ctx, next) => {
+	  const start = new Date();
+	  await next();
+	  const ms = new Date() - start;
+	  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+	});
+	// response
+	app.use(async(ctx) => {
+	  await ctx.render('index.html');
+	});
+	app.listen(8080);	
+	
+	
+代码解析：
+
+ctx 上下文： 
+
+- koa-views
+- koa-static
+- ctx 上下文？next?
+- ctx.render()
+- await
+
+- app.listen(8080)
 
 
-a
 
-a
+#### 6. 安装配置webpack
+	npm i --save webpack
+	npm i -g webpack
+	npm i --save-dev babel-loader
+新建并配置webpack.config.js文件，内容如下：
 
-a
+	const path = require('path')
+	module.exports = {
+	  devtool: 'cheap-module-eval-source-map',
+	  entry: `${__dirname}/app/main.js`,
+	  output: {
+	    filename: '[name].bundle.js',
+	    path: `${__dirname}/build`,
+	  },
+	  module: {
+	    rules: [
+	      {
+	        test: /\.js$/,
+	        exclude: /(node_modules|bower_components)/,
+	        use: {
+	          loader: 'babel-loader',
+	          options: {
+	            presets: ['env', 'react']
+	          }
+	        }
+	      }
+	    ]
+	  }
+	}
+配置完webpack后，在当前项目下执行如下命令打包启动：
+
+	webpack
+	nodemon server/index.js
+
+打开`localhost:8080`可以看到react中的内容显示在页面上.
+至此，我们完成了
+webpack:  用于打包
+koa: 启动本地服务，渲染模版
+react：提供展示.js
+
+可以看出:
+react都是用jsx模版引擎写的，
 
 
-a
-
-a
+至此，修改app/main.js需要重新打包webpack，代码才会更新。给开发带来不便. 实时打包显得尤为重要。安装webpack-dev-server
 
 
-a
+#### 7. webpack-dev-server 实现热加载功能
+webpack-dev-server是一个独立的NPM包,
+
+在命令行安装webpack-dev-server:
+
+	npm install webpack-dev-server --save-dev
+	npm install react-hot-loader@next --save-dev
+	
+修改webpack.config.js,内容如下：
+
+	const path = require('path')
+	const webpack = require('webpack')
+	module.exports = {
+	  devtool: 'cheap-module-eval-source-map',
+	  entry: [
+	    'react-hot-loader/patch',
+	    'webpack-dev-server/client?http://localhost:3000',
+	    'webpack/hot/only-dev-server', //HRM更新时刷新整个页面，如果是only-dev-server是手动刷新
+	    `${__dirname}/app/main.js`,
+	    ],
+	  output: {
+	    filename: '[name].bundle.js',
+	    path: `${__dirname}/build`,
+	    publicPath: '/build/'
+	    // webpack-dev-server服务上的文件是相对publicPath这个路径的，用于设置热加载的服务器
+	  },
+	  plugins: [
+	    new webpack.HotModuleReplacementPlugin(), // 启用 HMR
+	    new webpack.NamedModulesPlugin(),
+	    // prints more readable module names in the browser console on HMR updates
+	  ],
+	  resolve: {
+	    // 定义了解析模块路径时的配置，常用的就是extensions，可以用来指定模块的后缀，这样在引入模块时就不需要写后缀了，会自动补全
+	    extensions: ['.js', '.jsx']
+	  },
+	  module: {
+	    rules: [
+	      {
+	        test: /\.js$/,
+	        exclude: /(node_modules|bower_components)/,
+	        use: {
+	          loader: 'babel-loader',
+	          options: {
+	            presets: ['env', 'react']
+	          }
+	        }
+	      }
+	    ]
+	  },
+	  devServer: {
+	    hot: true,
+	    host: 'localhost',
+	    port: 3000,
+	    contentBase: path.resolve(__dirname, 'build')
+	  }
+	}
+package.json添加如下内容：
+
+	"scripts": {
+	    "test": "echo \"Error: no test specified\" && exit 1",
+	    "hot-server": "./node_modules/.bin/webpack-dev-server --config webpack.config.js --colors",
+	    "start-hot": "nodemon server/index.js",
+	    "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\""
+	  }	
+	  
+修改views/index.html中代码
+	
+	<script src="http://localhost:3000/build/bundle.js"></script>
+	
+	
+在终端输入：
+
+	npm i concurrently --save-dev
+	npm run dev
+	
+修改app/main.js内容刷新页面，就可以观察到main.bundle.js更新。
+	
+#### 8. webpack实现热更新（热替换）
+
+
+	
 
 
 
 
-<div id = 'one'>
-aaa
-</div>
+
+
+
 
