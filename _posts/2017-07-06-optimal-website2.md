@@ -145,4 +145,7 @@ Immutable 则提供了简洁高效的判断数据是否变化的方法，只需 
 - 源文件过大: 源码总共有5k多行，压缩后有16kb
 - 类型转换: 如果需要频繁地与服务器交互，那么Immutable对象就需要不断地与原生js进行转换，操作起来显得很繁琐
 - 侵入性: 例如引用第三方组件的时候，就不得不进行类型转换；在使用react-redux时，connect的shouldComponentUpdate已经实现，此处无法发挥作用。
-<a href = 'http://zhenhua-lee.github.io/react/Immutable.html'>为什么需要Immutable.js</a>
+
+[为什么需要Immutable.js](http://zhenhua-lee.github.io/react/Immutable.html)
+
+[React性能优化](https://segmentfault.com/a/1190000006254212)
