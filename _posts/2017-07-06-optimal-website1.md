@@ -2,7 +2,7 @@
 layout: post
 title: "打造高性能前端页面 "
 date: 2017-07-06
-excerpt: "性能优化"
+excerpt: "性能指标；检测工具；浏览器工作原理；常用优化总结；"
 tag:
 - 性能
 
@@ -246,24 +246,6 @@ IE、Firefox、Safari等等等等
 
 http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/
 浏览器渲染原理（难懂经典） 值得一看
-
-### 如何书写高效CSS
-CSS选择器具有高效的继承性， CSS选择器效率从高到低的排序如下：
-
-	ID选择器 #header
-	类选择器 .promo
-	元素选择器  div
-	兄弟选择器  h2 + p
-	子选择器   li > ul
-	后代选择器  ul a 7. 通用选择器 比如 *
-	属性选择器 type = “text”
-	伪类/伪元素选择器  a:hover
-
-
-
-
-### 网站图片
-优先使用webP和jepg格式图片
 
 ## 小结
 1.白屏时间
