@@ -2,14 +2,15 @@
 layout: post
 title: "打造高性能前端页面（二） "
 date: 2017-07-09
-excerpt: "Virtual DOM; Immutable; React实现懒加载; node.js缓存；webP图片； 高效CSS书写 "
+excerpt: "Virtual DOM; Immutable; "
 tag:
 - 性能
 
 comments: false
 ---
+## 一、Imutable.js克服react性能瓶颈
 
-## React Visual Dom
+### 1. React Visual Dom
 React的核心技术之一Virtual DOM
 
 Virtual DOM包含：
@@ -20,8 +21,7 @@ Virtual DOM包含：
 4. 根据差异操作节点方法（patch(DOMNode, PatchObject) -> DOMNode）
 
 <a href = 'http://www.cnblogs.com/justany/archive/2015/04/08/4401118.html'>VirtualDOM</a>
-## Imutable.js克服react性能瓶颈
-### shouldComponentUpdate()
+### 2. shouldComponentUpdate()
 
 熟悉 React 的都知道，React 做性能优化时有一个避免重复渲染的大招，就是使用 shouldComponentUpdate()，它默认返回 true，执行 render() 方法，然后做 Virtual DOM 比较，并得出是否需要做真实 DOM 更新，这里往往会带来很多无必要的渲染并成为性能瓶颈。人为设置返回`false`，阻止组件render,可大大提高性能。 对<b style='color:red'>基本类型的state和props</b>，有
 
@@ -54,7 +54,7 @@ Virtual DOM包含：
 > 因为JavaScript存储对象都是存地址的，所以浅复制会导致 obj 和 obj1指向同一块内存地址，大概的示意图如下。而深复制一般都是开辟一块新的内存地址，将原对象的各个属性逐个复制出去。
 
 
-### Immutable不可变数据
+### 3. Immutable不可变数据
 
 2.1 Persistent data structure
 Immutable.js提供了7种不可变的数据类型: `List、Map Stack OrderedMap Set OrderedSet Record`。对Immutable对象的操作均会返回新的对象，例如:
@@ -79,7 +79,7 @@ Immutable.js提供了7种不可变的数据类型: `List、Map Stack OrderedMap 
 	
 	console.log(map1.list === map2.list); // true
 
-### 在React中的实践
+### 4. 在React中的实践
 React是一个UI = f(state)库，为了解决性能问题引入了virtual dom，virtual dom通过diff算法修改DOM，实现高效的DOM更新。
 
 听起来很完美吧，但是有一个问题: 当执行setState时，即使state数据没发生改变，也会去做virtual dom的diff，因为在React的声明周期中，默认情况下shouldComponentUpdate总是返回true。那如何在shouldComponentUpdate进行state比较?
@@ -140,50 +140,9 @@ Immutable 则提供了简洁高效的判断数据是否变化的方法，只需 
 
 使用 Immutable 后，如下图，当红色节点的 state 变化后，不会再渲染树中的所有节点，而是只渲染图中绿色的部分：
 
-### React中引入Immutable.js带来的问题
+### 5. React中引入Immutable.js带来的问题
 
 - 源文件过大: 源码总共有5k多行，压缩后有16kb
 - 类型转换: 如果需要频繁地与服务器交互，那么Immutable对象就需要不断地与原生js进行转换，操作起来显得很繁琐
 - 侵入性: 例如引用第三方组件的时候，就不得不进行类型转换；在使用react-redux时，connect的shouldComponentUpdate已经实现，此处无法发挥作用。
 <a href = 'http://zhenhua-lee.github.io/react/Immutable.html'>为什么需要Immutable.js</a>
-
-## webpack+React-router实现懒加载
-
-
-
-## 自定义node.js缓存中间件
-
-## webP格式图片
-
-## 书写高效CSS
-
-CSS选择器具有高效的继承性， CSS选择器效率从高到低的排序如下：
-
-	ID选择器 #header
-	类选择器 .promo
-	元素选择器  div
-	兄弟选择器  h2 + p
-	子选择器   li > ul
-	后代选择器  ul a 7. 通用选择器 比如 *
-	属性选择器 type = “text”
-	伪类/伪元素选择器  a:hover
-
-
-3、让属性尽可能多的去继承
-
-尽可能让一些属性子可以继承父级元素，而不是覆盖父级元素。
-
-6、合理的布局
-
-合理的布局，可以改变css的写法以及渲染过程，可以多多参考大网站的布局方式。
-
-2、页面上少用绝对定位
-
-绝对定位(position:absolute )是网页布局中很常用到的，特别是作一些浮动效果时，也会让页面看起来非常的酷。但因为浏览器的渲染机制，网页中如果使用过多的绝对定位，会让你的网页变得非常的慢。
-
-建议的解决办法：尽可能少用，能用变通实现同样的效果，就用变通的办法。
-
-
-1. 优先采用class样式（如果要用标签选择器，尽量选择使用较少标签如li ul a等，而p div span等标签应减少使用，因此，可以通过增加语义化标签）
-
-比如header和footer的CSS可以复用，命名规则便不宜加添-head -foot 前缀，可按照功能或者样式命名
