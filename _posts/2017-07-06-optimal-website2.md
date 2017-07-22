@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "打造高性能前端页面（二）——优化实战 "
+title: "前端性能——React|webpack优化 "
 date: 2017-07-09
 excerpt: "Virtual DOM; Immutable; "
 tag:
