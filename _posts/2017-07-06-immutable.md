@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "使用Imutable.js提高React性能 "
+title: "Imutable.js与React "
 date: 2017-07-09
 excerpt: "Virtual DOM; Immutable; "
 tag:
