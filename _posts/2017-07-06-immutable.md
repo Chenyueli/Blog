@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "性能优化（1）——React|webpack优化 "
+title: "使用Imutable.js提高React性能 "
 date: 2017-07-09
 excerpt: "Virtual DOM; Immutable; "
 tag:
