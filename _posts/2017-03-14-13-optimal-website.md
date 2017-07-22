@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Web网站性能优化"
+title: "Web网站性能优化（1）"
 date: 2017-03-19
 excerpt: "yahoo性能优化14条："
 tag:
