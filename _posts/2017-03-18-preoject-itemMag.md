@@ -1,0 +1,215 @@
+---
+layout: post
+title: "项目：南方物资后台管理系统"
+date: 2017-03-17
+excerpt: "如何用Vue.js搭建一个物资后台管理网站"
+project: true
+tag:
+- vue.js
+- javascript
+- 项目实战
+
+comments: true
+---
+# 前言
+
+我们选择vue的周边库 `vue-cli`, `vue-router`,`vue-resource`,`vuex`
+
+> 1.vue-cli 创建项目
+
+> 2.vue-router 实现单页路由
+
+> 3.vuex 管理数据流
+
+> 4.vue-resource 请求node服务端
+
+> 5.vue文件  组件化开发
+
+PS：本文node v6.2.2 npm v3.9.5 vue v2.1.0 vue-router v2.0.3 vuex v2.0.0 
+
+
+## 安装
+
+首先，安装vue-cli。(确保已安装node和npm)
+
+`npm i -g vue-cli` 
+
+然后创建一个webpack项目并且下载依赖
+
+`vue init webpack vue-tutorial`
+
+`cd item`
+
+`npm install`
+
+接着使用 `npm run dev` 在热加载中运行应用
+
+这一行命令代表着它会去找到`package.json`的`scripts`对象，执行`node bulid/dev-server.js`。在这文件里，配置了Webpack，会让它去编译项目文件，并且运行服务器，我们在`localhost:8080`即可查看应用。
+
+接着安装路由、XHR请求、数据管理下载等其他库
+
+`npm i vue-router vuex vue-resource --save`
+
+` npm i css-loader node-sass sass-loader vue-style-loader --save`
+
+目录结构：
+
+## 初始化（main.js）
+
+	import Vue from 'vue'
+	import VueRouter from 'vue-router'
+	import VueResouce from 'vue-resource'
+	import store from './store'
+	import App from './App'
+	import NotFound from './components/404'
+	import Home from './components/Home'
+	
+
+
+### vue-router
+http://router.vuejs.org/zh-cn/
+路由构建单页应用Single Page Applications 
+用 Vue.js + vue-router 创建单页应用，是非常简单的。使用 Vue.js 时，我们就已经把组件组合成一个应用了，当你要把 vue-router 加进来，只需要配置组件和路由映射，然后告诉 vue-router 在哪里渲染它们。
+
+在main.js
+	
+	// 0. 安装、注册使用
+	import VueRouter from 'vue-router'
+	Vue.use(VueRouter)
+	
+	// 1. 定义（路由）组件。
+	// 可以从其他文件 import 进来
+	const Foo = { template: '<div>foo</div>' } 组件必须有template
+	import ManageSort from './components/ManageSort'
+	import AddItems from './components/AddItems'
+	import ManageOrder from './components/ManageOrder'
+	
+	// 2. 定义路由
+	
+	const routes = [
+		{
+		path:'/',
+		component: Home
+		},{
+		path:'/home',
+		component:Home,
+		children:[
+		{path:'manageSort',component:ManageSort},
+		{name:'addCargo',path:'addCargo/:appBorr',component:AddItems},
+		{name :'manageSort',path:'manageSort/:appBorr',component:ManageSort},
+		{path:'manageOrder',csomponent:ManageOrder},
+		{name:"manageOrder", path:'applyOrder/:orderType/:status',component:ManageOrder},
+		{path:'manageValuable',component:ManageValuable},
+		{name : "myproducts",path:'viewProducts/:appBorr/:type',component:ViewProducts},
+		]
+		},{
+		path:'/login',
+		component:Login
+		},{
+		path : '*',component : NotFound}
+	];
+	// 3. 创建 router 实例，然后传 `routes` 配置
+	const router = new VueRouter({routes});
+	
+	// 4. 创建和挂载根实例。
+	// 记得要通过 router 配置参数注入路由，
+	// 从而让整个应用都有路由功能
+
+	new Vue({
+	  el: '#app',
+	  router,
+	  template: '<App/>',
+	  store,
+	  // components: { App,Login,Home,NotFound}
+	  ...App,
+	});
+
+// 现在，应用已经启动了！
+
+在HTML中使用路由：
+
+	//使用 router-link 组件来导航.
+    //<router-link> 默认会被渲染成一个 `<a>` 标签
+	//通过传入 `to` 属性指定链接. 
+
+	<router-link :to="{name:'addCargo',params:{appBorr:'apply'}}">新增物资</router-link>
+		
+	<router-link to="/home/manageValuable">贵重物品</router-link>
+	
+	// 路由出口 
+  	// 路由匹配到的组件将渲染在这里
+  	<router-view></router-view>
+
+### vuex
+首先创建store文件夹，内有`index.js/action.js/mutation-type.js/mutation.js`四个文件
+
+	//在`index.js`中引入并注册Vuex,
+
+	import Vue from 'vue'
+	import Vuex from 'vuex'
+	import mutations from './mutations'
+	import actions from './actions'
+	
+	Vue.use(Vuex);
+	
+	const state = {
+		"valuables":[
+		{"id":1,"name":"百事可乐","amount":1,"price":10,"size":"200ml","remark":"无"},
+		{"id":2,"name":"项链","amount":1,"price":10000,"size":"1","remark":"珀金"}
+		]
+	}
+	
+	
+	//在action.js中定义函数对数据流进行操作
+	[types.ADD_CARGO] (state,cargo) {
+	    console.log(cargo.name);
+		
+	  },
+
+	//在`main.js`中调用store文件夹
+	`import store from './store'`
+
+在.vue组件中调用函数，就可以实现数据流更新
+
+`this.$store.dispatch("addCargo",this.newCargo);`
+
+
+
+### vue-resource
+安裝/引入/全局注冊：
+`npm i vue-resource --save`
+main.js
+
+	import VueResource from 'vue-resource'
+	Vue.use(VueResouce)
+
+使用：
+
+	
+	// 基于全局Vue对象使用http
+	Vue.http.post('/someUrl', [body], [options]).then(successCallback, errorCallback);
+	
+	基于某个Vue实例使用http
+	this.$http.get('/someUrl', [options]).then(successCallback, errorCallback);
+
+1. 在main.js 中**引入**并**注册**，就可以在组件中使用。
+
+	import VueResouce from 'vue-resource'
+	Vue.use(VueResouce)
+
+2. 组件调用：
+
+	var data = {"name":"chenmaomao"};
+	this.$http.post('/cargo/api/admin/item?m=add',data,{emulateJSON:true}).then( response => {
+					console.log(response.status);
+					// get object data
+					console.log(response.body);
+	});
+
+
+<pre>
+打包：
+$ npm run build
+</pre>
+### node js 調試
+用node.js写一端开启服务代码，就成功用vue建立起一个网站！
